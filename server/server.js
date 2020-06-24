@@ -18,20 +18,20 @@ app.use(express.static(publicPath));
 
 //  Greeting endpoint
 io.on('connection', function (socket) {
-  console.log('New connection');
+  console.log('New user connected');
 
-  socket.emit('newEmail', {
-    from: 'Ismail jamiu',
-    text: 'Hey guy, how far',
-    createdAt: new Date(),
-  });
+  socket.on('createMessage', function (message) {
+    console.log('createMessage', message);
 
-  socket.on('createEmail', function (newEmail) {
-    console.log('createEmail', newEmail);
+    io.emit('newMessage', {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().getTime(),
+    });
   });
 
   socket.on('disconnect', function () {
-    console.log('Connection lost');
+    console.log('CUser logged out');
   });
 });
 
