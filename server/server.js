@@ -17,10 +17,20 @@ const io = socketIO(server);
 app.use(express.static(publicPath));
 
 //  Greeting endpoint
-io.on('connection', (socket) => {
+io.on('connection', function (socket) {
   console.log('New connection');
 
-  socket.on('disconnect', () => {
+  socket.emit('newEmail', {
+    from: 'Ismail jamiu',
+    text: 'Hey guy, how far',
+    createdAt: new Date(),
+  });
+
+  socket.on('createEmail', function (newEmail) {
+    console.log('createEmail', newEmail);
+  });
+
+  socket.on('disconnect', function () {
     console.log('Connection lost');
   });
 });
