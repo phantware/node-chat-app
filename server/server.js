@@ -22,9 +22,6 @@ app.use(express.static(publicPath));
 io.on('connection', function (socket) {
   console.log('New user connected');
 
-  // socket.on('createMessage', function (message) {
-  //   console.log('createMessage', message);
-
   io.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
 
   socket.broadcast.emit(
@@ -35,10 +32,22 @@ io.on('connection', function (socket) {
   socket.on('createMessage', (message) => {
     io.emit('newMessage', generateMessage(message.from, message.text));
   });
-  // });
 
   socket.on('disconnect', function () {
     console.log('CUser logged out');
+  });
+
+  socket.on('createMessage', (message, callback) => {
+    console.log('createMessage', message);
+    io.emit('newMessage', generateMessage(message.from, message.text));
+    callback('This is from the server');
+  });
+
+  socket.on('createLocationMessage', (coords) => {
+    io.emit(
+      'newMessage',
+      generateMessage('Admin', `${coords.latitude}, ${coords.longitude}`)
+    );
   });
 });
 
