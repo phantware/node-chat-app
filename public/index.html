@@ -2,9 +2,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Chat App</title>
   </head>
   <body>
     <p>Welcome to chat app</p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      socket.on('connect', () => {
+        console.log('Connected to the server');
+      });
+      socket.on('disconnect', () => {
+        console.log('server disconnected');
+      });
+    </script>
   </body>
 </html>
