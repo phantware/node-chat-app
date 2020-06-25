@@ -5,7 +5,7 @@ const { generateMessage, generateLocationMessage } = require('./message');
 describe('generateMessage', () => {
   it('should generate correct message object', () => {
     // store response in variable
-    const from = 'Jamiu';
+    const from = 'Akinremi';
     const text = 'some message';
     const message = generateMessage(from, text);
     //assert from matches
