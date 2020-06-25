@@ -18,7 +18,7 @@ describe('generateMessage', () => {
 
 describe('generateLocationMessage', () => {
   it('should generate correct location', () => {
-    const from = 'Debi';
+    const from = 'Lagos';
     const latitude = 15;
     const longitude = 19;
     const url = 'https://www.google.com/maps?q=15,19';
